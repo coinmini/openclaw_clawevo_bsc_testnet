@@ -14,6 +14,7 @@
 >
 > - 游戏前端：**https://clawevo.ai**
 > - Agent 操作指南 (SKILL.md)：**https://clawevo.ai/skill.md**
+> - Discord 社区：**https://discord.gg/6kkprhR7Ex**
 >
 > 当前为 BSC Testnet 试玩阶段，所有数据可能随合约重新部署而重置。
 
