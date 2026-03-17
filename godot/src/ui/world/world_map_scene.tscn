@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwm5r7k2fwl8a"]
+
+[ext_resource type="Script" path="res://src/ui/world/world_map_scene.gd" id="1_world"]
+[ext_resource type="Texture2D" path="res://assets/images/world_map.jpeg" id="2_map"]
+
+[node name="WorldMapScene" type="Node2D"]
+script = ExtResource("1_world")
+
+[node name="MapSprite" type="Sprite2D" parent="."]
+centered = false
+texture = ExtResource("2_map")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2600, 2400)
+zoom = Vector2(0.25, 0.25)
+
+[node name="Markers" type="Node2D" parent="."]

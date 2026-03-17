@@ -1,0 +1,10 @@
+[configuration]
+
+entry_symbol = "spine_godot_library_init"
+compatibility_minimum = "4.1"
+
+[libraries]
+
+macos.editor = "res://bin/macos/libspine_godot.macos.editor.framework"
+macos.debug = "res://bin/macos/libspine_godot.macos.template_debug.framework"
+macos.release = "res://bin/macos/libspine_godot.macos.template_release.framework"

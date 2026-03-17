@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq4m2k8h2rtx6"]
+
+[ext_resource type="Script" path="res://src/ui/battle/action_menu.gd" id="1_action"]
+
+[node name="ActionMenu" type="VBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+theme_override_constants/separation = 1
+script = ExtResource("1_action")
+
+[node name="FightBtn" type="Button" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "FIGHT"
+
+[node name="RunBtn" type="Button" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "RUN"

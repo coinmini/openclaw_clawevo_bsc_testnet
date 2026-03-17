@@ -1,0 +1,86 @@
+# ── Dependencies ──
+node_modules/
+
+# ── Build artifacts ──
+artifacts/
+cache/
+typechain-types/
+coverage/
+coverage.json
+deployments/
+.openzeppelin/
+
+# ── Generated ABI exports ──
+abis/
+!ponder/abis/
+
+# ── Secrets & Environment ──
+.env
+.env.local
+*.pem
+*.key
+
+# ── Next.js ──
+web/.next/
+web/out/
+web/node_modules/
+
+# ── Subgraph ──
+subgraph/build/
+subgraph/generated/
+subgraph/node_modules/
+subgraph-deploy.tar.gz
+
+# ── Ponder ──
+ponder/node_modules/
+
+# ── OS & IDE ──
+.DS_Store
+__pycache__/
+*.pyc
+
+# ── Godot / Spine binaries ──
+.godot/
+godot/.godot/
+bin/
+macos/
+
+# ── Root-level raw media (source assets, not needed in repo) ──
+/battle_*.mp3
+/bflr_*.mp3
+/bflr_*.ogg
+/topic.mp3
+/game_map.jpeg
+/world_map_huasheng.mp3
+/gemini_ai.jpeg
+/gemini_huasheng.png
+/rika_run_clean.png
+
+# ── Source asset directories (Spine originals, pre-export) ──
+/npc/
+/sprite/
+/sprite_sheet_test/
+/avatar/
+/shenshou/
+/sit_hero/
+/peach_tree/
+/wind_look/
+/wild_animal/
+/word_map_video/
+/need_change_color/
+
+# ── Personal / dev-only ──
+/UI/
+/preview_ui.py
+/hooks-demo/
+/.claude/
+/.agents/
+/AGENTS.md
+/game_design_proposal.md
+/web-deploy.skill
+
+# ── Personal scripts (not part of core deployment) ──
+scripts/spine_reskin.py
+scripts/spine_reskin_keep_alpha_RGB.py
+scripts/pixelate_spine.py
+scripts/generate_server_config_pdf.py

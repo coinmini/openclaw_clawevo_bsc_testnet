@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq2y7kpf5w6ga"]
+
+[ext_resource type="Script" path="res://src/ui/battle/pokemon_display.gd" id="1_display"]
+[ext_resource type="PackedScene" uid="uid://csbap5tqevwrn" path="res://src/ui/battle/hp_bar.tscn" id="2_hp_bar"]
+
+[node name="PokemonDisplay" type="Control"]
+custom_minimum_size = Vector2(90, 75)
+script = ExtResource("1_display")
+
+[node name="Platform" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 48.0
+offset_right = 68.0
+offset_bottom = 52.0
+color = Color(0.3, 0.3, 0.3, 0.5)
+
+[node name="Sprite" type="Node2D" parent="."]
+position = Vector2(40, 50)
+
+[node name="InfoPanel" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 54.0
+offset_right = 80.0
+offset_bottom = 75.0
+theme_override_constants/separation = 0
+
+[node name="NameLabel" type="Label" parent="InfoPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "Pokemon"
+
+[node name="LevelLabel" type="Label" parent="InfoPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 4
+text = "Lv5"
+
+[node name="HpBar" parent="InfoPanel" instance=ExtResource("2_hp_bar")]
+layout_mode = 2

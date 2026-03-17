@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw2r5k8m7fxa3"]
+
+[ext_resource type="Script" path="res://src/ui/result/result_scene.gd" id="1_result"]
+
+[node name="ResultScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_result")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.12, 0.92)
+
+[node name="ResultLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = 80.0
+offset_top = 10.0
+offset_right = 240.0
+offset_bottom = 26.0
+text = "YOU WIN!"
+horizontal_alignment = 1
+
+[node name="SpriteAnchor" type="Node2D" parent="."]
+position = Vector2(160, 95)
+
+[node name="DetailLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = 40.0
+offset_top = 148.0
+offset_right = 280.0
+offset_bottom = 162.0
+text = "Winner won in N turns!"
+horizontal_alignment = 1
+
+[node name="PlayAgainBtn" type="Button" parent="."]
+layout_mode = 1
+offset_left = 110.0
+offset_top = 164.0
+offset_right = 210.0
+offset_bottom = 176.0
+text = "PLAY AGAIN"

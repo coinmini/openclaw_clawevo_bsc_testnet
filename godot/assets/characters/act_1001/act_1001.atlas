@@ -1,0 +1,208 @@
+act_1001.png
+size:1698,205
+filter:Linear,Linear
+pma:true
+A_bao
+bounds:1602,28,23,22
+A_bo
+bounds:110,2,16,25
+rotate:90
+A_bs0
+bounds:153,4,14,19
+offsets:1,1,16,21
+rotate:90
+A_bs1
+bounds:174,4,14,19
+offsets:1,1,16,21
+rotate:90
+A_bs2
+bounds:195,4,14,19
+offsets:1,1,16,21
+rotate:90
+A_daiji
+bounds:1530,2,44,50
+A_er1
+bounds:137,3,14,15
+A_gongji
+bounds:1585,153,44,50
+A_hounao
+bounds:1605,52,24,33
+offsets:1,0,25,33
+A_jineng
+bounds:532,2,44,52
+rotate:90
+A_kua
+bounds:1669,52,36,23
+rotate:90
+A_l jiao1
+bounds:1605,87,25,21
+A_l jiao2
+bounds:1601,5,21,32
+rotate:90
+A_l jiao3
+bounds:1335,81,33,21
+A_l jiao4
+bounds:1496,52,23,53
+A_l jiao4_1
+bounds:1497,150,23,53
+A_l mao
+bounds:1631,32,36,33
+A_l shou1
+bounds:1669,152,23,26
+rotate:90
+A_l shou2
+bounds:1454,2,32,38
+A_l shou3_1
+bounds:1563,152,20,51
+A_mawei
+bounds:1441,107,35,28
+A_piao0_1
+bounds:1257,93,37,110
+A_piao1_1
+bounds:1296,93,37,110
+A_piao2_1
+bounds:420,2,36,110
+rotate:90
+A_r jianjia0
+bounds:1556,109,36,41
+A_r jianjia1
+bounds:1594,110,36,41
+A_r jianjia2
+bounds:1631,162,36,41
+A_r jiao1
+bounds:1576,10,21,23
+rotate:90
+A_r jiao2
+bounds:1576,33,24,22
+A_r jiao3
+bounds:1669,90,25,40
+A_r jiao4
+bounds:1521,54,36,51
+A_r mao
+bounds:1522,152,51,39
+rotate:90
+A_r shou1
+bounds:1632,127,33,35
+rotate:90
+A_r shou2
+bounds:1669,177,26,27
+rotate:90
+A_r shou3_1
+bounds:1508,3,20,47
+offsets:0,0,21,47
+A_shengli
+bounds:586,2,44,51
+rotate:90
+A_shenti
+bounds:1441,137,54,66
+A_siwang
+bounds:1559,57,44,50
+A_toufa1
+bounds:1669,132,18,26
+rotate:90
+A_toufa2
+bounds:216,5,13,23
+rotate:90
+A_toufa3
+bounds:1515,107,39,41
+A_toufa4
+bounds:1454,42,63,40
+rotate:90
+A_wb0
+bounds:1478,107,35,28
+A_wb1
+bounds:1632,97,35,28
+A_wb2
+bounds:1632,67,35,28
+A_wuqi
+bounds:2,13,56,190
+A_yaodai
+bounds:1488,2,38,18
+rotate:90
+A_ying
+bounds:327,3,91,18
+offsets:0,0,92,18
+tx/bk0001
+bounds:377,40,163,114
+offsets:15,3,195,153
+rotate:90
+tx/bk0002
+bounds:247,23,180,128
+offsets:7,8,195,153
+rotate:90
+tx/bk0003
+bounds:110,20,183,135
+offsets:5,9,195,153
+rotate:90
+tx/bk0004
+bounds:493,48,155,139
+offsets:19,10,195,153
+rotate:90
+tx/bk0005
+bounds:754,50,153,117
+offsets:20,20,195,153
+rotate:90
+tx/dg0001
+bounds:634,49,154,118
+offsets:3,16,163,138
+rotate:90
+tx/dg0002
+bounds:873,56,147,123
+offsets:8,10,163,138
+rotate:90
+tx/dg0003
+bounds:998,66,137,98
+offsets:15,12,163,138
+rotate:90
+tx/dg0004
+bounds:1140,2,114,77
+offsets:18,32,163,138
+tx/dg0005
+bounds:1256,2,104,77
+offsets:19,32,163,138
+tx/dl
+bounds:60,13,190,48
+offsets:3,2,195,52
+rotate:90
+tx/gx
+bounds:1370,7,95,82
+offsets:1,1,98,83
+rotate:90
+tx/sg0002
+bounds:1376,122,63,81
+offsets:29,4,119,86
+tx/sg0004
+bounds:1028,6,110,58
+offsets:4,12,119,86
+tx/sg0005
+bounds:639,2,113,45
+offsets:2,20,119,86
+tx/sg0006
+bounds:247,2,78,19
+offsets:21,34,119,86
+tx/yw0001
+bounds:1335,104,99,39
+offsets:14,2,130,57
+rotate:90
+tx/yw0003
+bounds:876,3,123,51
+offsets:3,2,130,57
+tx/yw0005
+bounds:1098,81,122,53
+offsets:4,2,130,57
+rotate:90
+tx/yw0006
+bounds:1153,81,122,53
+offsets:4,2,130,57
+rotate:90
+tx/yw0007
+bounds:1208,81,122,47
+offsets:4,2,130,57
+rotate:90
+tx/yw0008
+bounds:754,2,120,46
+offsets:5,3,130,57
+tx/yw0010
+bounds:1001,4,60,25
+offsets:33,19,130,57
+rotate:90

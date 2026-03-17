@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://gqgtirtg5u8s"
+valid=false
+
+[deps]
+
+source_file="res://assets/characters/act_1002/act_1002.skel"
+
+[params]
+

@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpkjy6w3nv5rb"]
+
+[ext_resource type="Script" path="res://src/ui/battle/battle_scene.gd" id="1_battle"]
+[ext_resource type="PackedScene" uid="uid://dfjvk2l8m7wpa" path="res://src/ui/battle/battle_dialog.tscn" id="2_dialog"]
+[ext_resource type="PackedScene" uid="uid://cq4m2k8h2rtx6" path="res://src/ui/battle/action_menu.tscn" id="3_action"]
+[ext_resource type="PackedScene" uid="uid://dtr5m8v2auwh4" path="res://src/ui/battle/move_menu.tscn" id="4_move"]
+
+[node name="BattleScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_battle")
+
+[node name="BattleBg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 152.0
+stretch_mode = 6
+
+[node name="OpponentArea" type="Control" parent="."]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 8.0
+offset_right = 316.0
+offset_bottom = 83.0
+
+[node name="PlayerArea" type="Control" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 30.0
+offset_right = 130.0
+offset_bottom = 145.0
+
+[node name="BattleDialog" parent="." instance=ExtResource("2_dialog")]
+layout_mode = 1
+offset_top = -28.0
+
+[node name="ActionMenu" parent="." instance=ExtResource("3_action")]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 154.0
+offset_right = 316.0
+offset_bottom = 178.0
+
+[node name="MoveMenu" parent="." instance=ExtResource("4_move")]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 152.0
+offset_right = 318.0
+offset_bottom = 178.0

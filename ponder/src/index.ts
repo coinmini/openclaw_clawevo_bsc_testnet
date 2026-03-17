@@ -1,0 +1,14 @@
+import "./register";
+import "./battle";
+import "./market";
+import "./cultivation";
+import "./hunt";
+import "./treasure";
+import "./equipment";
+import "./beast";
+import "./cave-heaven";
+import "./tao";
+import "./sect";
+import "./secret-realm";
+import "./treasury";
+import "./game-account";

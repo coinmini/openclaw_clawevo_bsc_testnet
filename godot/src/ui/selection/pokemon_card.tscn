@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5v8rt3k2fwl7"]
+
+[ext_resource type="Script" path="res://src/ui/selection/pokemon_card.gd" id="1_card"]
+
+[node name="PokemonCard" type="PanelContainer"]
+custom_minimum_size = Vector2(52, 70)
+mouse_filter = 0
+script = ExtResource("1_card")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SpriteCenter" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(52, 30)
+
+[node name="Sprite" type="Node2D" parent="VBoxContainer/SpriteCenter"]
+position = Vector2(26, 15)
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+horizontal_alignment = 1
+text = "Pokemon"
+
+[node name="TypeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 4
+horizontal_alignment = 1
+text = "TYPE"
+
+[node name="StatsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 4
+horizontal_alignment = 1
+text = "HP:0 ATK:0
+DEF:0 SPD:0"

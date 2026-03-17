@@ -1,0 +1,21 @@
+{
+  "name": "pikemon-subgraph",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph codegen && graph build",
+    "deploy:studio": "graph deploy pikemon-cultivation-game",
+    "auth": "graph auth",
+    "test": "graph test",
+    "create:local": "graph create --node http://localhost:8020/ pikemon-cultivation-game",
+    "deploy:local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 pikemon-cultivation-game"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.98.1",
+    "@graphprotocol/graph-ts": "^0.35.1"
+  },
+  "devDependencies": {
+    "matchstick-as": "^0.6.0"
+  }
+}

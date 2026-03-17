@@ -1,0 +1,435 @@
+# ════════════════════════════════════════════════════════════════
+#  ENUMS
+# ════════════════════════════════════════════════════════════════
+
+enum ChallengeStatus {
+  Open
+  Settled
+  Cancelled
+}
+
+enum OrderStatus {
+  Active
+  Cancelled
+  Filled
+}
+
+enum CaveTier {
+  None
+  CaveHeaven
+  BlessedLand
+  SpiritLand
+}
+
+enum SectWarStatus {
+  Pending
+  Accepted
+  Settled
+  Rejected
+}
+
+# ════════════════════════════════════════════════════════════════
+#  CORE: Player（中心实体）
+# ════════════════════════════════════════════════════════════════
+
+type Player @entity(immutable: false) {
+  id: Bytes!                          # address
+  origin: Int!
+  element: Int!
+  attack: BigInt!
+  defense: BigInt!
+  perception: BigInt!
+  wisdom: BigInt!
+  realm: Int!
+  name: String
+  registeredAt: BigInt!
+  registeredBlock: BigInt!
+
+  # ── 聚合统计 ──
+  totalMatchesPlayed: Int!
+  totalMatchesWon: Int!
+  totalMatchesLost: Int!
+  totalWagerWon: BigInt!
+  totalWagerLost: BigInt!
+  totalHunts: Int!
+  totalHuntsWon: Int!
+  totalTreasures: Int!
+  totalCultivationSessions: Int!
+  spiritMaterials: BigInt!
+
+  # ── 反向查找 ──
+  challengesCreated: [Challenge!]! @derivedFrom(field: "creator")
+  ordersCreated: [MarketOrder!]! @derivedFrom(field: "seller")
+  cultivationSessions: [CultivationSession!]! @derivedFrom(field: "player")
+  breakthroughs: [BreakthroughEvent!]! @derivedFrom(field: "player")
+  hunts: [HuntEvent!]! @derivedFrom(field: "player")
+  treasures: [TreasureEvent!]! @derivedFrom(field: "player")
+  equipmentOwned: [EquipmentToken!]! @derivedFrom(field: "owner")
+  beastsOwned: [BeastToken!]! @derivedFrom(field: "owner")
+}
+
+# ════════════════════════════════════════════════════════════════
+#  约战列表（PvP Challenges）
+# ════════════════════════════════════════════════════════════════
+
+type Challenge @entity(immutable: false) {
+  id: Bytes!                          # Bytes.fromBigInt(challengeId)
+  challengeId: BigInt!
+  creator: Player!
+  wager: BigInt!
+  status: ChallengeStatus!
+  createdAt: BigInt!
+  createdBlock: BigInt!
+  cancelledAt: BigInt
+  settledAt: BigInt
+}
+
+# ════════════════════════════════════════════════════════════════
+#  战绩索引（Battle Records）
+# ════════════════════════════════════════════════════════════════
+
+type BattleMatch @entity(immutable: true) {
+  id: Bytes!                          # Bytes.fromBigInt(matchId)
+  matchId: BigInt!
+  winner: Bytes!
+  payout: BigInt!
+  settledAt: BigInt!
+  settledBlock: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlayerDailyStats @entity(immutable: false) {
+  id: Bytes!                          # player.concat(Bytes.fromI32(dayId))
+  player: Player!
+  dayId: Int!
+  matchesPlayed: Int!
+  matchesWon: Int!
+  wagerWon: BigInt!
+  wagerLost: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  坊市（Marketplace）
+# ════════════════════════════════════════════════════════════════
+
+type MarketOrder @entity(immutable: false) {
+  id: Bytes!                          # Bytes.fromBigInt(orderId)
+  orderId: BigInt!
+  seller: Player!
+  tokenContract: Bytes!
+  tokenId: BigInt!
+  price: BigInt!
+  isERC1155: Boolean!
+  amount: BigInt
+  status: OrderStatus!
+  createdAt: BigInt!
+  createdBlock: BigInt!
+  cancelledAt: BigInt
+  filledAt: BigInt
+  buyer: Bytes
+  fee: BigInt
+}
+
+type AllowedToken @entity(immutable: false) {
+  id: Bytes!                          # tokenContract address
+  allowed: Boolean!
+  updatedAt: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  修炼（Cultivation）
+# ════════════════════════════════════════════════════════════════
+
+type CultivationSession @entity(immutable: true) {
+  id: Bytes!
+  player: Player!
+  duration: BigInt!
+  effectiveSeconds: BigInt!
+  lsEarned: BigInt!
+  lsFee: BigInt!
+  expGained: BigInt!
+  heartGained: BigInt!
+  fortuneGained: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type BreakthroughEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Player!
+  fromRealm: Int!
+  toRealm: Int!
+  success: Boolean!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  打野（Hunt）
+# ════════════════════════════════════════════════════════════════
+
+type HuntEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Player!
+  regionId: Int!
+  won: Boolean!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+type HuntDropEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Player!
+  regionId: Int!
+  dropQuality: Int!
+  dropReward: BigInt!
+  equipmentTokenId: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  挖宝（Treasure）
+# ════════════════════════════════════════════════════════════════
+
+type TreasureEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Player!
+  regionId: Int!
+  quality: Int!
+  reward: BigInt!
+  equipmentTokenId: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  装备（Equipment）
+# ════════════════════════════════════════════════════════════════
+
+type EquipmentToken @entity(immutable: false) {
+  id: Bytes!                          # Bytes.fromBigInt(tokenId)
+  tokenId: BigInt!
+  owner: Player!
+  ownerAddress: Bytes!
+  equipmentType: Int!
+  quality: Int!
+  bonusBP: Int!
+  enhanceLevel: Int!
+  elementAffinity: Int!
+  originAffinity: Int!
+  factionAffinity: Int!
+  mintedAt: BigInt!
+  mintedBlock: BigInt!
+  decomposed: Boolean!
+  equippedBy: Bytes
+}
+
+type EquipmentEnhancedEvent @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  newLevel: Int!
+  cost: BigInt!
+  timestamp: BigInt!
+}
+
+type EquipmentUpgradeEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes!
+  newTokenId: BigInt!
+  quality: Int!
+  success: Boolean!
+  timestamp: BigInt!
+}
+
+type EquipmentDecomposedEvent @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt!
+  spiritMaterials: BigInt!
+  lsRefund: BigInt!
+  timestamp: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  灵兽（Beast）
+# ════════════════════════════════════════════════════════════════
+
+type BeastToken @entity(immutable: false) {
+  id: Bytes!                          # Bytes.fromBigInt(tokenId)
+  tokenId: BigInt!
+  owner: Player!
+  star: Int!
+  element: Int!
+  powerRate: Int!
+  speciesId: Int!
+  mintedAt: BigInt!
+  mintedBlock: BigInt!
+  equippedBy: Bytes
+}
+
+type BeastHuntEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Player!
+  regionId: Int!
+  star: Int!
+  captured: Boolean!
+  beastTokenId: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  洞天（CaveHeaven）
+# ════════════════════════════════════════════════════════════════
+
+type CaveHeavenState @entity(immutable: false) {
+  id: Bytes!                          # player address
+  player: Player!
+  tier: CaveTier!
+  openedAt: BigInt!
+  upgradedAt: BigInt
+  totalMaintenancePaid: BigInt!
+}
+
+type CaveEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes!
+  eventType: String!
+  tier: Int!
+  cost: BigInt!
+  timestamp: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  道侣（Tao Partnership）
+# ════════════════════════════════════════════════════════════════
+
+type Partnership @entity(immutable: false) {
+  id: Bytes!
+  partnerA: Bytes!
+  partnerB: Bytes!
+  formedAt: BigInt!
+  active: Boolean!
+  dissolvedAt: BigInt
+}
+
+type TaoEvent @entity(immutable: true) {
+  id: Bytes!
+  eventType: String!
+  initiator: Bytes!
+  target: Bytes!
+  fee: BigInt!
+  timestamp: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  宗门（Sect）
+# ════════════════════════════════════════════════════════════════
+
+type Sect @entity(immutable: false) {
+  id: Bytes!                          # Bytes.fromBigInt(sectId)
+  sectId: BigInt!
+  name: String!
+  master: Bytes!
+  memberCount: Int!
+  createdAt: BigInt!
+  members: [SectMembership!]! @derivedFrom(field: "sect")
+}
+
+type SectMembership @entity(immutable: false) {
+  id: Bytes!                          # sectIdBytes.concat(memberAddress)
+  sect: Sect!
+  player: Bytes!
+  joinedAt: BigInt!
+  active: Boolean!
+  leftAt: BigInt
+}
+
+type SectWar @entity(immutable: false) {
+  id: Bytes!                          # Bytes.fromBigInt(warId)
+  warId: BigInt!
+  attackerSectId: BigInt!
+  defenderSectId: BigInt!
+  wager: BigInt!
+  status: SectWarStatus!
+  initiatedAt: BigInt!
+  winnerSectId: BigInt
+  settledAt: BigInt
+}
+
+# ════════════════════════════════════════════════════════════════
+#  秘境（SecretRealm）
+# ════════════════════════════════════════════════════════════════
+
+type SecretRealmRun @entity(immutable: true) {
+  id: Bytes!
+  player: Player!
+  realmId: Int!
+  timestamp: BigInt!
+}
+
+type LayerChallengeEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes!
+  realmId: Int!
+  layer: Int!
+  won: Boolean!
+  timestamp: BigInt!
+}
+
+type LayerDropEvent @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes!
+  realmId: Int!
+  layer: Int!
+  reward: BigInt!
+  timestamp: BigInt!
+}
+
+type SecretRealmParty @entity(immutable: false) {
+  id: Bytes!                          # Bytes.fromBigInt(partyId)
+  partyId: BigInt!
+  leader: Bytes!
+  realmId: Int!
+  memberCount: Int!
+  entered: Boolean!
+  createdAt: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  金库（Treasury）
+# ════════════════════════════════════════════════════════════════
+
+type FeeCollectedEvent @entity(immutable: true) {
+  id: Bytes!
+  payer: Bytes!
+  amount: BigInt!
+  burnAmount: BigInt!
+  devAmount: BigInt!
+  foundationAmount: BigInt!
+  timestamp: BigInt!
+}
+
+type TreasuryStats @entity(immutable: false) {
+  id: Bytes!                          # singleton: Bytes.fromI32(0)
+  totalCollected: BigInt!
+  totalBurned: BigInt!
+  totalDev: BigInt!
+  totalFoundation: BigInt!
+}
+
+# ════════════════════════════════════════════════════════════════
+#  全局统计（Protocol Stats — singleton）
+# ════════════════════════════════════════════════════════════════
+
+type ProtocolStats @entity(immutable: false) {
+  id: Bytes!                          # singleton: Bytes.fromI32(1)
+  totalPlayers: Int!
+  totalMatches: Int!
+  totalChallenges: Int!
+  totalOrders: Int!
+  totalOrdersFilled: Int!
+  totalEquipmentMinted: Int!
+  totalBeastsMinted: Int!
+  totalSectsCreated: Int!
+}

@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* Prevent scroll bounce on mobile */
+html,
+body {
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+/* Phaser canvas container */
+#game-container {
+  width: 100%;
+  height: 100%;
+}
+
+#game-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+/* Custom scrollbar for side panels */
+aside::-webkit-scrollbar {
+  width: 4px;
+}
+aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+aside::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 2px;
+}
+
+/* Xianxia Theme Typography and Colors */
+@layer utilities {
+  .bg-xianxia-slate {
+    background-color: #0c1218; /* Deep ink slate */
+  }
+  
+  .bg-xianxia-dark {
+    background-color: rgba(11, 16, 21, 0.95); /* Semi-transparent obsidian */
+  }
+  
+  .border-xianxia-gold {
+    border-color: rgba(212, 175, 55, 0.5); /* Aged Gold */
+  }
+  
+  .border-xianxia-jade {
+    border-color: rgba(46, 139, 87, 0.5); /* Dark Jade */
+  }
+  
+  .text-xianxia-gold {
+    color: rgba(212, 175, 55, 0.9);
+  }
+  
+  .text-xianxia-jade {
+    color: rgba(46, 139, 87, 0.9);
+  }
+
+  .text-xianxia-parchment {
+    color: rgba(245, 235, 215, 0.9);
+  }
+
+  /* Xianxia Glow Animations */
+  .animate-glow-amber {
+    animation: glow-amber 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-glow-jade {
+    animation: glow-jade 2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes glow-amber {
+  from {
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.2), inset 0 0 5px rgba(212, 175, 55, 0.1);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(212, 175, 55, 0.2);
+  }
+}
+
+@keyframes glow-jade {
+  from {
+    box-shadow: 0 0 5px rgba(46, 139, 87, 0.2), inset 0 0 5px rgba(46, 139, 87, 0.1);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(46, 139, 87, 0.6), inset 0 0 10px rgba(46, 139, 87, 0.2);
+  }
+}

@@ -1,0 +1,403 @@
+specVersion: 1.3.0
+description: "Pikemon 修仙全链游戏 — BSC 合约事件索引"
+schema:
+  file: ./schema.graphql
+indexerHints:
+  prune: auto
+
+dataSources:
+  # ── Register ──
+  - kind: ethereum/contract
+    name: Register
+    network: chapel
+    source:
+      address: "0x2E4B508fD337368Af31080762075a045e0589D6A"
+      abi: Register
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Player
+        - ProtocolStats
+      abis:
+        - name: Register
+          file: ./abis/Register.json
+      eventHandlers:
+        - event: RegisterIntentCreated(indexed address,uint8,uint256)
+          handler: handleRegisterIntentCreated
+        - event: CultivatorRegistered(indexed address,uint8,uint8,uint256,uint256,uint256,uint256)
+          handler: handleCultivatorRegistered
+        - event: NameSet(indexed address,string)
+          handler: handleNameSet
+      file: ./src/register.ts
+
+  # ── Battle ──
+  - kind: ethereum/contract
+    name: Battle
+    network: chapel
+    source:
+      address: "0x0E4A2F2c9100899c8dd594F22cE0F245fBaA4A14"
+      abi: Battle
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Challenge
+        - BattleMatch
+        - Player
+        - PlayerDailyStats
+        - ProtocolStats
+      abis:
+        - name: Battle
+          file: ./abis/Battle.json
+      eventHandlers:
+        - event: ChallengeCreated(indexed uint256,indexed address,uint256)
+          handler: handleChallengeCreated
+        - event: ChallengeCancelled(indexed uint256,indexed address)
+          handler: handleChallengeCancelled
+        - event: MatchSettled(indexed uint256,indexed address,uint256)
+          handler: handleMatchSettled
+      file: ./src/battle.ts
+
+  # ── Market ──
+  - kind: ethereum/contract
+    name: Market
+    network: chapel
+    source:
+      address: "0xb99160e82535d43f77Bf05Ad007e7d40F2DbB968"
+      abi: Market
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - MarketOrder
+        - AllowedToken
+        - Player
+        - ProtocolStats
+      abis:
+        - name: Market
+          file: ./abis/Market.json
+      eventHandlers:
+        - event: OrderCreated(indexed uint256,indexed address,address,uint256,uint256)
+          handler: handleOrderCreated
+        - event: OrderCreated1155(indexed uint256,indexed address,address,uint256,uint256,uint256)
+          handler: handleOrderCreated1155
+        - event: OrderCancelled(indexed uint256,indexed address)
+          handler: handleOrderCancelled
+        - event: OrderFilled(indexed uint256,indexed address,indexed address,uint256,uint256)
+          handler: handleOrderFilled
+        - event: TokenAllowed(indexed address,bool)
+          handler: handleTokenAllowed
+      file: ./src/market.ts
+
+  # ── Cultivation ──
+  - kind: ethereum/contract
+    name: Cultivation
+    network: chapel
+    source:
+      address: "0x9a0B33Bcf5bB2e81c36A522069FB5f5054c208eb"
+      abi: Cultivation
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - CultivationSession
+        - BreakthroughEvent
+        - Player
+      abis:
+        - name: Cultivation
+          file: ./abis/Cultivation.json
+      eventHandlers:
+        - event: CultivationStarted(indexed address,uint256)
+          handler: handleCultivationStarted
+        - event: CultivationEnded(indexed address,uint256,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleCultivationEnded
+        - event: BreakthroughAttempted(indexed address,uint8,uint8,bool)
+          handler: handleBreakthroughAttempted
+      file: ./src/cultivation.ts
+
+  # ── Hunt ──
+  - kind: ethereum/contract
+    name: Hunt
+    network: chapel
+    source:
+      address: "0xe935a026401098099b5b25Bad3648B8D2C70dA7F"
+      abi: Hunt
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - HuntEvent
+        - HuntDropEvent
+        - Player
+      abis:
+        - name: Hunt
+          file: ./abis/Hunt.json
+      eventHandlers:
+        - event: HuntStarted(indexed address,uint8,bool)
+          handler: handleHuntStarted
+        - event: HuntDropClaimed(indexed address,uint8,uint8,uint256,uint256)
+          handler: handleHuntDropClaimed
+      file: ./src/hunt.ts
+
+  # ── Treasure ──
+  - kind: ethereum/contract
+    name: Treasure
+    network: chapel
+    source:
+      address: "0xC95c8a37e1315177FDBe7798d47F2e12973BCD9b"
+      abi: Treasure
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - TreasureEvent
+        - Player
+      abis:
+        - name: Treasure
+          file: ./abis/Treasure.json
+      eventHandlers:
+        - event: TreasureStarted(indexed address,uint8,uint256)
+          handler: handleTreasureStarted
+        - event: TreasureFinished(indexed address,uint8,uint8,uint256,uint256)
+          handler: handleTreasureFinished
+      file: ./src/treasure.ts
+
+  # ── Equipment ──
+  - kind: ethereum/contract
+    name: Equipment
+    network: chapel
+    source:
+      address: "0x5743929215b06e25Bd063fA23B0a095A5404EA74"
+      abi: Equipment
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - EquipmentToken
+        - EquipmentEnhancedEvent
+        - EquipmentUpgradeEvent
+        - EquipmentDecomposedEvent
+        - Player
+        - ProtocolStats
+      abis:
+        - name: Equipment
+          file: ./abis/Equipment.json
+      eventHandlers:
+        - event: EquipmentMinted(indexed address,indexed uint256,uint8,uint8,uint16,uint8,uint8,uint8)
+          handler: handleEquipmentMinted
+        - event: EquipmentEquipped(indexed address,uint8,uint256)
+          handler: handleEquipmentEquipped
+        - event: EquipmentUnequipped(indexed address,uint8,uint256)
+          handler: handleEquipmentUnequipped
+        - event: EquipmentEnhanced(indexed uint256,uint8,uint256)
+          handler: handleEquipmentEnhanced
+        - event: UpgradeStarted(indexed address,uint8,uint256)
+          handler: handleUpgradeStarted
+        - event: UpgradeFinished(indexed address,uint256,uint8,bool)
+          handler: handleUpgradeFinished
+        - event: EquipmentDecomposed(indexed uint256,uint256,uint256)
+          handler: handleEquipmentDecomposed
+        - event: MaterialsChanged(indexed address,uint256,int256)
+          handler: handleMaterialsChanged
+      file: ./src/equipment.ts
+
+  # ── Beast ──
+  - kind: ethereum/contract
+    name: Beast
+    network: chapel
+    source:
+      address: "0xb093cE9A022700b4760F5443Ae6Afe34BD1DCbBD"
+      abi: Beast
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - BeastToken
+        - BeastHuntEvent
+        - Player
+        - ProtocolStats
+      abis:
+        - name: Beast
+          file: ./abis/Beast.json
+      eventHandlers:
+        - event: BeastHuntStarted(indexed address,uint8,uint256)
+          handler: handleBeastHuntStarted
+        - event: BeastHuntFinished(indexed address,uint8,uint8,bool,uint256)
+          handler: handleBeastHuntFinished
+        - event: BeastEquipped(indexed address,uint256)
+          handler: handleBeastEquipped
+        - event: BeastUnequipped(indexed address,uint256)
+          handler: handleBeastUnequipped
+        - event: BeastMinted(indexed address,indexed uint256,uint8,uint8,uint16,uint8)
+          handler: handleBeastMinted
+      file: ./src/beast.ts
+
+  # ── CaveHeaven ──
+  - kind: ethereum/contract
+    name: CaveHeaven
+    network: chapel
+    source:
+      address: "0xEEC5DF3Bf8C5D3a4e3EC469811DDaE327DCB8978"
+      abi: CaveHeaven
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - CaveHeavenState
+        - CaveEvent
+      abis:
+        - name: CaveHeaven
+          file: ./abis/CaveHeaven.json
+      eventHandlers:
+        - event: CaveOpened(indexed address,uint256)
+          handler: handleCaveOpened
+        - event: CaveUpgraded(indexed address,uint8,uint256)
+          handler: handleCaveUpgraded
+        - event: MaintenancePaid(indexed address,uint256,uint256)
+          handler: handleMaintenancePaid
+        - event: CaveDowngraded(indexed address,uint8)
+          handler: handleCaveDowngraded
+      file: ./src/cave-heaven.ts
+
+  # ── Tao ──
+  - kind: ethereum/contract
+    name: Tao
+    network: chapel
+    source:
+      address: "0xaAa50163EeCae1d92Eb99441F4d02B97Ce81eA66"
+      abi: Tao
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Partnership
+        - TaoEvent
+      abis:
+        - name: Tao
+          file: ./abis/Tao.json
+      eventHandlers:
+        - event: PartnershipProposed(indexed address,indexed address)
+          handler: handlePartnershipProposed
+        - event: PartnershipFormed(indexed address,indexed address)
+          handler: handlePartnershipFormed
+        - event: ProposalCancelled(indexed address,indexed address)
+          handler: handleProposalCancelled
+        - event: PartnershipDissolved(indexed address,indexed address,uint256)
+          handler: handlePartnershipDissolved
+      file: ./src/tao.ts
+
+  # ── Sect ──
+  - kind: ethereum/contract
+    name: Sect
+    network: chapel
+    source:
+      address: "0xfE226C4638B7b3DFD79b7db747f43cE57e2C394E"
+      abi: Sect
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - Sect
+        - SectMembership
+        - SectWar
+        - ProtocolStats
+      abis:
+        - name: Sect
+          file: ./abis/Sect.json
+      eventHandlers:
+        - event: SectCreated(indexed uint256,indexed address,string)
+          handler: handleSectCreated
+        - event: MemberJoined(indexed uint256,indexed address)
+          handler: handleMemberJoined
+        - event: MemberLeft(indexed uint256,indexed address)
+          handler: handleMemberLeft
+        - event: MemberKicked(indexed uint256,indexed address)
+          handler: handleMemberKicked
+        - event: SectWarInitiated(indexed uint256,uint256,uint256,uint256)
+          handler: handleSectWarInitiated
+        - event: SectWarAccepted(indexed uint256)
+          handler: handleSectWarAccepted
+        - event: SectWarSettled(indexed uint256,uint256)
+          handler: handleSectWarSettled
+      file: ./src/sect.ts
+
+  # ── SecretRealm ──
+  - kind: ethereum/contract
+    name: SecretRealm
+    network: chapel
+    source:
+      address: "0xa489F78Cd96a3b892A60FDa5be015724b97714D2"
+      abi: SecretRealm
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - SecretRealmRun
+        - LayerChallengeEvent
+        - LayerDropEvent
+        - SecretRealmParty
+      abis:
+        - name: SecretRealm
+          file: ./abis/SecretRealm.json
+      eventHandlers:
+        - event: SoloEntered(indexed address,uint8)
+          handler: handleSoloEntered
+        - event: LayerChallenged(indexed address,uint8,uint8,bool)
+          handler: handleLayerChallenged
+        - event: LayerDropClaimed(indexed address,uint8,uint8,uint256)
+          handler: handleLayerDropClaimed
+        - event: PartyCreated(indexed uint256,indexed address,uint8)
+          handler: handlePartyCreated
+        - event: PartyJoined(indexed uint256,indexed address)
+          handler: handlePartyJoined
+        - event: PartyEntered(indexed uint256,uint8)
+          handler: handlePartyEntered
+      file: ./src/secret-realm.ts
+
+  # ── Treasury ──
+  - kind: ethereum/contract
+    name: Treasury
+    network: chapel
+    source:
+      address: "0x00A1Bf042f681E8CB4b0Bad99048F746E49228dD"
+      abi: Treasury
+      startBlock: 96158284
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - FeeCollectedEvent
+        - TreasuryStats
+      abis:
+        - name: Treasury
+          file: ./abis/Treasury.json
+      eventHandlers:
+        - event: FeeCollected(indexed address,uint256,uint256,uint256,uint256)
+          handler: handleFeeCollected
+      file: ./src/treasury.ts

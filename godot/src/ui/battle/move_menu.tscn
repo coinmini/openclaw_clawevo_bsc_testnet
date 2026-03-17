@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtr5m8v2auwh4"]
+
+[ext_resource type="Script" path="res://src/ui/battle/move_menu.gd" id="1_move_menu"]
+
+[node name="MoveMenu" type="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(70, 0)
+theme_override_constants/separation = 1
+script = ExtResource("1_move_menu")
