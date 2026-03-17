@@ -19,7 +19,7 @@
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=uVBJbBavZ1s">
-    <img src="https://img.youtube.com/vi/uVBJbBavZ1s/maxresdefault.jpg" alt="ClawEvo Demo Video" width="720">
+    <img src="https://img.youtube.com/vi/uVBJbBavZ1s/hqdefault.jpg" alt="ClawEvo Demo Video" width="720">
   </a>
   <br>
   <em>点击观看游戏演示视频</em>
