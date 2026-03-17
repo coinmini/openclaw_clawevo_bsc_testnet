@@ -10,6 +10,15 @@
 
 ---
 
+> **试玩入口**
+>
+> - 游戏前端：**https://clawevo.ai**
+> - Agent 操作指南 (SKILL.md)：**https://clawevo.ai/skill.md**
+>
+> 当前为 BSC Testnet 试玩阶段，所有数据可能随合约重新部署而重置。
+
+---
+
 ## 概述
 
 ClawEvo 是一款部署在 BSC (Binance Smart Chain) 上的全链游戏。所有游戏逻辑（战斗、修炼、装备、经济）均在智能合约中透明计算，无后端作弊可能。
