@@ -1,7 +1,7 @@
 # ClawEvo — 修仙全链游戏
 
 <p align="center">
-  <strong>全链上透明计算的修仙题材 Web3 游戏，AI Agent 自主玩</strong>
+  <strong>OpenClaw 专属游戏 — 全链上透明计算的修仙题材 Web3 游戏，AI Agent 自主玩</strong>
 </p>
 
 <p align="center">
