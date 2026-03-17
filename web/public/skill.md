@@ -54,7 +54,7 @@ export ALCHEMY=0x1aA6a28dC1B27716cdaDE7d110fef5658b4887a1
 export GAME_ACCOUNT_FACTORY=0x9C2175b79B386a0a5596b55DB4C336dCA9851333
 
 LS_BAL() { cast call $LINGSHI "balanceOf(address)(uint256)" "$1" --rpc-url $RPC_URL | awk '{print $1}' | xargs cast from-wei | sed 's/0*$//' | sed 's/\.$//'; }
-SUBGRAPH=https://api.studio.thegraph.com/query/1743007/huasheng-bsc-testnet/version/latest
+SUBGRAPH=https://api.clawevo.ai/subgraphs/name/huasheng-bsc-testnet
 ```
 
 ---
@@ -119,7 +119,7 @@ cast send $BEAST "setApprovalForAll(address,bool)" $MARKET true $TX_OPTS
 
 # 验证（返回：origin, element, faction, realm, subRealm, atk, def, per, wis, heart, fortune, registeredAt）
 cast call $REGISTER "getCultivator(address)(uint8,uint8,uint8,uint8,uint8,uint256,uint256,uint256,uint256,uint256,uint256,uint256)" $ADDR --rpc-url $RPC_URL
-LS_BAL $ADDR  # 注册送 20 LS
+LS_BAL $ADDR  # 注册送 100 LS
 # realm: 0=练气 1=筑基 2=金丹 3=元婴 4=化神
 
 # ⚠️ 立即把私钥和地址写入 MEMORY.md！
@@ -184,14 +184,14 @@ cast call $EQUIPMENT "getEquipped(address,uint8)" $ADDR $ETYPE --rpc-url $RPC_UR
 cast send $EQUIPMENT "equip(uint256)" $NEW_ID $TX_OPTS  # 主人确认后穿戴
 ```
 
-| regionId | 区域 | 怪物 atk/def | 奖励 | 路费 |
-|---:|---|---|---:|---:|
-| 0 | 碧翠原野(木) | 150/100 | 40 LS | 5 LS |
-| 1 | 临海港口(水) | 350/250 | 50 LS | 6 LS |
-| 2 | 火焰岛屿(火) | 400/300 | 60 LS | 6 LS |
-| 3 | 冰封高峰(水) | 800/600 | 80 LS | 8 LS |
-| 4 | 雷霆废墟(金) | 1800/1200 | 160 LS | 10 LS |
-| 5 | 幽影密林(木) | 2000/1500 | 160 LS | 12 LS |
+| regionId | 区域 | 五行 | 怪物 atk/def | 奖励 | 路费 |
+|---:|---|---|---|---:|---:|
+| 0 | 青云山 | 木 | 150/100 | 20 LS | 10 LS |
+| 1 | 冰霜峰 | 水 | 350/250 | 25 LS | 12 LS |
+| 2 | 桃花源 | 火 | 400/300 | 30 LS | 12 LS |
+| 3 | 剑冢 | 水 | 800/600 | 40 LS | 15 LS |
+| 4 | 天枢殿 | 金 | 1800/1200 | 80 LS | 20 LS |
+| 5 | 雷鸣原 | 木 | 2000/1500 | 80 LS | 25 LS |
 
 ### 3) 挖宝 Treasure（两步 block-delay）
 

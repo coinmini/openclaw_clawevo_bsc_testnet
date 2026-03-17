@@ -1,7 +1,8 @@
 import { Scene } from "phaser";
 import { EventBus } from "../EventBus";
 import { BattleCharacter } from "../objects/BattleCharacter";
-import { ELEMENT_TO_CHARACTER, ELEMENT_NAMES } from "@/lib/constants";
+import { ELEMENT_NAMES } from "@/lib/constants";
+import { pickCharacterId } from "../characterPicker";
 import { truncateAddress } from "@/lib/formatting";
 
 const BATTLE_BGS = [
@@ -60,7 +61,7 @@ export class BattleScene extends Scene {
         this.load.image(bgKey, `/assets/images/battle_bgs/${fileName}.png`);
       }
     }
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 4; i++) {
       const key = `bgm-battle-${i}`;
       if (!this.cache.audio.exists(key)) {
         this.load.audio(key, `/assets/audio/bgm/battle_${i}.ogg`);
@@ -82,7 +83,7 @@ export class BattleScene extends Scene {
 
     // -- Stop world BGM, play battle BGM --
     this.sound.stopByKey("bgm-world");
-    const bgmIdx = Math.floor(Math.random() * 5) + 1;
+    const bgmIdx = Math.floor(Math.random() * 4) + 1;
     this.battleBgmKey = `bgm-battle-${bgmIdx}`;
     this.sound.play(this.battleBgmKey, { loop: true, volume: 0.4 });
 
@@ -141,11 +142,11 @@ export class BattleScene extends Scene {
       .setOrigin(0.5)
       .setAlpha(0);
 
-    // -- Characters (start off-screen, entrance tween) --
-    const charA = ELEMENT_TO_CHARACTER[data.playerAElement] ?? "act_1001";
+    // -- Characters (use same Spine as world map, based on wallet address) --
+    const charA = pickCharacterId(data.playerAAddress);
     const charB = isHunt && data.monsterCharId
       ? data.monsterCharId
-      : (ELEMENT_TO_CHARACTER[data.playerBElement] ?? "act_1002");
+      : pickCharacterId(data.playerBAddress);
 
     this.playerA = new BattleCharacter(this, -150, CHAR_Y, charA, true);
     this.playerB = new BattleCharacter(this, 2070, CHAR_Y, charB, false);

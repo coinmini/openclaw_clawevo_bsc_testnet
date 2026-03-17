@@ -60,6 +60,7 @@ export default function Home() {
   const draining = useRef(false);
   const lastChatId = useRef<number>(0);
   const focusSent = useRef(false);
+  const initialEventsLoaded = useRef(false);
 
   const [activePanel, setActivePanel] = useState<PanelKey | null>(null);
   const [agentTooltip, setAgentTooltip] = useState<{ address: string; x: number; y: number } | null>(null);
@@ -177,8 +178,10 @@ export default function Home() {
   }, [chatMessages]);
 
   // Enqueue new events from polling into animation queue
+  // On first load, mark all existing events as seen without animating them
   useEffect(() => {
     if (!events || events.length === 0) return;
+
     // Build address→element lookup from players cache
     const elementByAddr = new Map<string, number>();
     if (players) {
@@ -202,8 +205,28 @@ export default function Home() {
           e.playerBElement ??
           (e.playerBAddress ? elementByAddr.get(e.playerBAddress) : undefined),
       }));
-    enqueueAnimations(animEvents);
-  }, [events, players, enqueueAnimations]);
+
+    if (!initialEventsLoaded.current) {
+      // First load: mark all as seen but don't animate (prevents replaying old battles)
+      initialEventsLoaded.current = true;
+      const { seenEventIds } = useGameStore.getState();
+      const updatedSeen = new Set(seenEventIds);
+      for (const e of animEvents) updatedSeen.add(e.id);
+      useGameStore.setState({ seenEventIds: updatedSeen });
+      return;
+    }
+
+    // Only animate battles related to the connected wallet
+    const myAddr = address?.toLowerCase();
+    const myEvents = myAddr
+      ? animEvents.filter(
+          (e) =>
+            e.playerAddress.toLowerCase() === myAddr ||
+            e.playerBAddress?.toLowerCase() === myAddr
+        )
+      : [];
+    enqueueAnimations(myEvents);
+  }, [events, players, enqueueAnimations, address]);
 
   // Drain animation queue one at a time
   const drainQueue = useCallback(() => {
