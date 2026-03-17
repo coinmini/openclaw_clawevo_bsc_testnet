@@ -407,4 +407,4 @@ contracts/
 
 ## License
 
-MIT
+GPL-3.0 — 任何修改和衍生作品必须同样开源。详见 [LICENSE](LICENSE)。
